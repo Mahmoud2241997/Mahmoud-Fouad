@@ -11,10 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Install Chrome
+      - name: Install Chrome and Chromedriver
         run: |
           sudo apt-get update
-          sudo apt-get install -y chromium-browser
+          sudo apt-get install -y chromium-browser chromium-chromedriver
+          sudo ln -s /usr/bin/chromium-browser /usr/bin/google-chrome
+          sudo ln -s /usr/lib/chromium/chromedriver /usr/bin/chromedriver
       
       - name: Checkout code
         uses: actions/checkout@v4
@@ -29,7 +31,7 @@ jobs:
         run: mvn clean test -Dtestng.xml=src/test/resources/testng.xml
 
       - name: Upload Test Reports
-        uses: actions/upload-artifact@v4  # التحديث هنا
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: testng-reports
