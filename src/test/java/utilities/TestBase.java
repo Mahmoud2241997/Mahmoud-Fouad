@@ -10,6 +10,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
 import java.time.Duration;
+ChromeOptions options = new ChromeOptions();
+options.addArguments(
+    "--headless",
+    "--disable-gpu",
+    "--no-sandbox",
+    "--remote-allow-origins=*",
+    "--user-data-dir=/tmp/chrome-user-data"  // ← إضافة مسار فريد
+);
+WebDriver driver = new ChromeDriver(options);
 
 public class TestBase {
     public WebDriver driver;
